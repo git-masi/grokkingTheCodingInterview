@@ -26,7 +26,7 @@ list2.insert(8);
 console.log(cycleLength(list));
 console.log(cycleLength(list2));
 
-function cycleLength(list) {
+export function cycleLength(list) {
   let fast = list.head;
   let slow = fast;
   let anchor = null;
