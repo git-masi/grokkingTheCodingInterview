@@ -25,12 +25,16 @@ function hasCycle(list) {
   let fast = list.head;
   let slow = list.head;
 
-  while (fast !== null) {
+  while (fast) {
     fast = fast.next;
 
-    if (fast) {
-      fast = fast.next;
-    } else {
+    if (!fast) {
+      return false;
+    }
+
+    fast = fast.next;
+
+    if (!fast) {
       return false;
     }
 
