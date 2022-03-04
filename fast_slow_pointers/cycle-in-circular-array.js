@@ -4,12 +4,12 @@ console.log(hasCycle([2, 2, -1, 2]));
 
 console.log(hasCycle([2, 1, -1, -2]));
 
-console.log(hasCycle([1]));
+console.log(hasCycle([1])); // false (one element)
 
 console.log(hasCycle([1, -1]));
 
 function hasCycle(arr) {
-  if (arr.length < 2) return true;
+  if (arr.length < 2) return false;
 
   let fast = 0;
   let slow = 0;
