@@ -1,12 +1,17 @@
 export class MinHeap {
   constructor() {
     this.vals = [];
+    this.size = 0;
   }
 
   insert(val) {
     this.vals.push(val);
+
     let currIdx = this.vals.length - 1;
+
     this._bubbleUp(currIdx);
+
+    this.size++;
   }
 
   extractMin() {
@@ -17,6 +22,8 @@ export class MinHeap {
     const min = this.vals.pop();
 
     this._sinkDown();
+
+    this.size--;
 
     return min;
   }
