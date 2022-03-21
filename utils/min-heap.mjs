@@ -1,17 +1,22 @@
 export class MinHeap {
-  constructor() {
+  constructor(sortKey) {
     this.vals = [];
     this.size = 0;
+    this.sortKey = sortKey;
   }
 
   insert(val) {
     this.vals.push(val);
 
+    this.size++;
+
     let currIdx = this.vals.length - 1;
 
     this._bubbleUp(currIdx);
+  }
 
-    this.size++;
+  viewMin() {
+    return this.vals[0];
   }
 
   extractMin() {
@@ -21,9 +26,9 @@ export class MinHeap {
 
     const min = this.vals.pop();
 
-    this._sinkDown();
-
     this.size--;
+
+    this._sinkDown();
 
     return min;
   }
@@ -44,10 +49,18 @@ export class MinHeap {
     return parentIdx * 2 + 2;
   }
 
+  _getVal(idx, options = {}) {
+    if (idx < 0 || idx >= this.vals.length) {
+      return options?.nullVal ?? null;
+    }
+
+    return this.sortKey ? this.vals[idx][this.sortKey] : this.vals[idx];
+  }
+
   _bubbleUp(currIdx) {
     let parentIdx = this._getParentIndex(currIdx);
 
-    while (parentIdx >= 0 && this.vals[parentIdx] > this.vals[currIdx]) {
+    while (parentIdx >= 0 && this._getVal(parentIdx) > this._getVal(currIdx)) {
       this._swap(this.vals, parentIdx, currIdx);
       currIdx = parentIdx;
       parentIdx = this._getParentIndex(currIdx);
@@ -62,9 +75,9 @@ export class MinHeap {
       lChildIdx = this._getLeftChildIndex(currIdx);
       rChildIdx = this._getRightChildIndex(currIdx);
 
-      currVal = this.vals[currIdx];
-      lVal = this.vals[lChildIdx] ?? Infinity;
-      rVal = this.vals[rChildIdx] ?? Infinity;
+      currVal = this._getVal(currIdx);
+      lVal = this._getVal(lChildIdx, { nullVal: Infinity });
+      rVal = this._getVal(rChildIdx, { nullVal: Infinity });
     };
 
     setValues();
