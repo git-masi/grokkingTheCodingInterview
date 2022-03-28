@@ -1,3 +1,8 @@
+/*
+This isn't really a cyclic sort but it shows how in the case where
+the numbers represent a specific range without repetition we really
+can just overwrite the unsorted values to be the values in the range
+*/
 package main
 
 import (
@@ -12,9 +17,6 @@ func main() {
 	log.Print(x)
 }
 
-// This isn't really a cyclic sort but it shows how in the case where
-// the numbers represent a specific range without repetition we really
-// can just overwrite the unsorted values to be the values in the range
 func cyclicSort(s []int) {
 	for i, v := range s {
 		log.Print(i, v)
