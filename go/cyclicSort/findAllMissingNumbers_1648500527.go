@@ -1,3 +1,8 @@
+/*
+I have to be careful not to go out of range when using index lookups
+Go does not return nil/undefined if you attempt to read an index out
+of bounds, isntead it panics
+*/
 package main
 
 import (
